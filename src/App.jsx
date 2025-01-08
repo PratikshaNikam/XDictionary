@@ -1,24 +1,42 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
-import words from './words.json'
+//import words from './words.json'
 
 function App() {
-  const [defination, setDefination] = useState('p')
+  const [definition, setDefinition] = useState('')
   const [word, setWord] = useState('')
+
+
+  
+const words=[
+
+  { word: "React", meaning: "A JavaScript library for building user interfaces." },
+
+  { word: "Component", meaning: "A reusable building block in React." },
+
+  { word: "State", meaning: "An object that stores data for a component." }
+
+]
+
   
   
   
   const searchWord = () => {
+    const wordData = words.find((wordObj) => wordObj.word.toLowerCase() === word.toLowerCase())
+    if (wordData) {
+      setDefinition(wordData.meaning)
+    } else {
+      setDefinition('Word not found in the dictionary.')
+    }
+
     
-    words.filter((w) => w[word] ? setDefination(w[word]) : setDefination("Word not found in the dictionary."))
-    //setDefination(defination1)
+    
   }
 
-  console.log(defination)
+  //console.log(definition)
   //console.log(words[word])
-  console.log(word)
+  //console.log(word)
   return (
     <>
       <h1>Dictionary App</h1>
@@ -26,7 +44,8 @@ function App() {
         <input type="text" onChange={(e) => setWord(e.target.value)} />
         <button onClick={searchWord}>Search</button>
       </div>
-      <p>Defination: {defination}</p>
+      <h3>Definition: </h3>
+      <p>{definition}</p>
      
       
       
